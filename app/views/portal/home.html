@@ -1,0 +1,186 @@
+{% extends 'portal/layout.html' %}
+
+{% block portal %}
+
+   <!-- Start Hero Slider -->
+  <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="yes" data-arrows="yes" data-style="fade" data-pause="yes">
+    <ul class="slides">
+
+      {% for slider in sliders %}
+      <li class=" parallax" style="background-image:url(../../assets/images/slider/{{ slider.imagem }});"></li>
+      {% endfor %}
+
+    </ul>
+  </div>
+  <!-- End Hero Slider --> 
+
+
+  <!-- Start Notice Bar -->
+  <div class="notice-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-6 notice-bar-title"> <span class="notice-bar-title-icon hidden-xs"><i class="fa fa-calendar fa-3x"></i></span> <span class="title-note">Breve</span> <strong>Evento Principal</strong> </div>
+        <div class="col-md-3 col-sm-6 col-xs-6 notice-bar-event-title">
+          <h5><a href="/eventos/find/{{ lastevent.id }}">{{ lastevent.titulo }}</a></h5>
+          <span class="meta-data">{{ lastevent.data|date("j F  Y \\a\\t g:ia ","America/Sao_Paulo") }}</span> </div>
+        <div id="getting-started" class="col-md-4 col-sm-6 col-xs-12 counter" data-date='{{ lastevent.data|date("M days %H:%M:%S") }}'>
+          <div class="timer-col"> <span id="days"></span> <span class="timer-type">dias</span> </div>
+          <div class="timer-col"> <span id="hours"></span> <span class="timer-type">horas</span> </div>
+          <div class="timer-col"> <span id="minutes"></span> <span class="timer-type">minutos</span> </div>
+          <div class="timer-col"> <span id="seconds"></span> <span class="timer-type">segundos</span> </div>
+        </div>
+        <div class="col-md-2 col-sm-6 hidden-xs"> <a href="/eventos" class="btn btn-primary btn-lg btn-block">Todos Eventos</a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Notice Bar --> 
+
+
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+
+      <!-- Start container -->
+      <div class="container">
+
+        <!-- Start Featured Blocks -->
+        <div class="row">           
+          <div class="featured-blocks clearfix">
+            <div class="col-md-4 col-sm-4 featured-block">
+             <a href="our-staff.html" class="img-thumbnail"> 
+              <img src="https://www.globalframe.com.br/gf_base/empresas/MIGA/imagens/D75536676292CE4624DD0C8EDE3EE1D2B909_pastor.jpg" alt="staff"> <strong>Pastor</strong> <span class="more">veja</span> </a> </div>
+
+            <div class="col-md-4 col-sm-4 featured-block">
+             <a href="about.html" class="img-thumbnail">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT5MOnaslxGfTad2EZGgSnhRRc0ePU7xuTY4A&usqp=CAU" alt="staff"> <strong>Presbíteros</strong> <span class="more">veja</span> </a> </div>
+
+            <div class="col-md-4 col-sm-4 featured-block">
+             <a href="sermons.html" class="img-thumbnail"> 
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR1g8_hqiC05b67KuBtKHliDrYkRuZQkuQ83w&usqp=CAU" alt="staff"> <strong>Diáconos</strong> <span class="more">veja</span> </a> </div>
+          </div>
+        </div>
+        <!-- End Featured Blocks --> 
+
+        <!-- Eventos -- BLOG -- DEVOCIONAL -->
+        <div class="row">
+          <div class="col-md-8 col-sm-6"> 
+            <!-- Eventos  -->
+            <div class="listing events-listing">
+              <header class="listing-header">
+                <h3>Eventos</h3>
+              </header>
+              <section class="listing-cont">
+                {% if events %}
+                <ul>
+                  {% for event in events %}
+                  <li class="item event-item">
+                    <div class="event-date"> <span class="date">{{ event.data|date("j") }}</span> <span class="month">{{ event.data|date("M") }}</span> </div>
+                    <div class="event-detail">
+                      <h4><a href="/eventos/find/{{ event.id }}">{{ event.titulo }}</a></h4>
+                      <span class="event-dayntime meta-data">{{ event.data|date("l") }} | {{ event.horario }}</span> </div>
+                    <div class="to-event-url">
+                      <div><a href="/eventos/find/{{ event.id }}" class="btn btn-default btn-sm">Mais</a></div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <h4>Não há eventos no momento</h4>
+                {% endif %}
+              </section>
+            </div>
+            <!-- Eventos  -->
+
+            <div class="spacer-30"></div>
+
+            <!-- Blog -->
+            <div class="listing post-listing">
+              <header class="listing-header">
+                <h3>Blog</h3>
+              </header>
+              <section class="listing-cont">
+                {% if posts %}
+                <ul>
+                  {% for post in posts %}
+                  {% set admin_id = post.post_by %}
+                  <li class="item post">
+                    <div class="row">
+                      <div class="col-md-4"> <a href="#" class="media-box"> <img src="../../assets/images/blog/{{ post.imagem }}" alt="" class="img-thumbnail"> </a></div>
+                      <div class="col-md-8">
+                        <div class="post-title">
+                          <h2><a href="/post/find/{{ post.id }}"> {{ post.titulo }} </a></h2>
+                          <span class="meta-data"><i class="fa fa-calendar"></i> Postado em: {{ post.create_at }} </span></div>
+                          {% set texto_blog = post.texto %}
+                          <p>{{ limita250(texto_blog) }}</p>                       
+                      </div>
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <h4>Não postagem em Blog</h4>
+                {% endif %}
+              </section>
+            </div>
+
+            <!-- end Blog -->
+          </div>
+
+          <!-- Start Sidebar -->
+          <div class="col-md-4 col-sm-6"> 
+            <!-- Devocionais -->
+            <div class="listing sermons-listing">
+              <header class="listing-header">
+                <h3>Devocionais</h3>
+              </header>
+              <section class="listing-cont">
+                <ul>
+                  <li class="item sermon featured-sermon"> <span class="date">Feb 14, 2014</span>
+                    <h4><a href="single-sermon.html">How To Recover The Cutting Edge</a></h4>
+                    <div class="featured-sermon-video">
+                      <iframe width="200" height="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS0idL9xPgIRODmkWdlh4E4ZYFL1RSR_bpeNw&usqp=CAU"></iframe>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis consectetur adipiscing elit. Nulla convallis egestas rhoncus</p>
+                    <div class="sermon-actions"> <a href="#" data-placement="top" data-toggle="tooltip" data-original-title="Video"><i class="fa fa-video-camera"></i></a> <a href="#" data-placement="top" data-toggle="tooltip" data-original-title="Audio"><i class="fa fa-headphones"></i></a> <a href="#" data-placement="top" data-toggle="tooltip" data-original-title="Read online"><i class="fa fa-file-text-o"></i></a> <a href="#" data-placement="top" data-toggle="tooltip" data-original-title="Download PDF"><i class="fa fa-book"></i></a> </div>
+                  </li>
+                  
+                </ul>
+              </section>
+            </div>
+            <!-- END Devocionais -->
+
+          </div>
+        </div>
+         <!-- END Eventos -- BLOG -- DEVOCIONAL -->
+
+      </div>
+      <!-- END container -->
+    </div>
+  </div>
+  <!-- END Content -->
+
+  <!-- Start Featured Gallery -->
+  <div class="featured-gallery">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-3">
+          <h4>Novas Fotos na Galeria</h4>
+          <a href="#" class="btn btn-default btn-lg">Outras Galerias</a> </div>
+        <div class="col-md-3 col-sm-3 post format-image">
+         <a href="https://api.time.com/wp-content/uploads/2015/06/church.jpg" class="media-box" data-rel="prettyPhoto[Gallery]"> 
+          <img src="https://api.time.com/wp-content/uploads/2015/06/church.jpg" alt=""> </a> </div>
+
+        <div class="col-md-3 col-sm-3 post format-video">
+         <a href="https://bloximages.chicago2.vip.townnews.com/phillytrib.com/content/tncms/assets/v3/editorial/4/0e/40eac37c-c3e5-5bcb-9158-37e459c58830/5cba077a67891.image.jpg?resize=1200%2C800" class="media-box" data-rel="prettyPhoto[Gallery]"> 
+          <img src="https://bloximages.chicago2.vip.townnews.com/phillytrib.com/content/tncms/assets/v3/editorial/4/0e/40eac37c-c3e5-5bcb-9158-37e459c58830/5cba077a67891.image.jpg?resize=1200%2C800" alt=""> </a> </div>
+
+        <div class="col-md-3 col-sm-3 post format-image">
+         <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQKoCx1C4m5cnqvqMWja1whALjDHgc9tcs7DQ&usqp=CAU" class="media-box" data-rel="prettyPhoto[Gallery]">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQKoCx1C4m5cnqvqMWja1whALjDHgc9tcs7DQ&usqp=CAU" alt=""> </a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Featured Gallery --> 
+
+
+{% endblock %}

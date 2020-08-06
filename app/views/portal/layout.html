@@ -1,0 +1,26 @@
+
+{% include 'portal/includes/top.html' %}
+
+<body>
+<!--[if lt IE 7]>
+	<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
+<div class="body"> 
+
+<!-- Navbar --> 
+{% include 'portal/includes/header.html' %}
+
+
+<!-- Corpo da página --> 
+{% block portal %}{% endblock %}
+
+
+
+{% include 'portal/includes/footer.html' %} 
+</div><!-- <-- fim da classe body --> 
+<!-- End Featured Gallery --> 
+ 
+
+{% include 'portal/includes/scripts.html' %} 
+</body>
+</html>

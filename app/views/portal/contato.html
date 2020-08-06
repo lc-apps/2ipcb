@@ -1,0 +1,96 @@
+{% extends 'portal/layout.html' %}
+
+{% block portal %}
+
+  <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">Contacto</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Contacto</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <header class="single-post-header clearfix">
+              <h2 class="post-title">Onde Estamos</h2>
+            </header>
+
+            <div class="post-content">
+              <div id="gmap">
+                <iframe src="https://maps.google.com/?ie=UTF8&amp;ll=-21.7680914,-47.0805954&amp;spn=1.043846,0.077162&amp;t=m&amp;z=18&amp;output=embed"></iframe>
+              </div>
+
+              <div class="row">
+              
+                <form action="/contato/send"   method="POST" role="form"> 
+
+                  <div class="col-md-6 margin-15">
+
+                    <div class="form-group">
+                      <input type="text" id="name" name="name"  class="form-control" placeholder="Name*">
+                       {{ message('name')  }}
+                    </div>
+
+                    <div class="form-group">
+                      <input type="email" id="email" name="email"  class="form-control" placeholder="Email*">
+                      {{ message('email')  }}  
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone">
+                      {{ message('phone')  }}
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <textarea maxlength="5000" rows="10" class="form-control" id="comments" name="comments" style="height: 138px;"></textarea>
+                       {{ message('email')  }}
+                    </div>
+                  </div>
+
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                  </div>
+                </form>
+
+                <div class="clearfix"></div>
+               
+              </div>
+              
+               <div id="message" class="alert alert-success fade in"> <a class="close" data-dismiss="alert" href="#">&times;</a> <strong>OK</strong> {{ message('message')  }}</div>
+              
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

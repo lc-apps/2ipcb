@@ -1,0 +1,34 @@
+ <!-- Start Sidebar -->
+          <div class="col-md-3 sidebar">
+             <!-- Featured Event Widget -->
+            <div class="widget featured_event_widget"> 
+              <div class="sidebar-widget-title">
+                <h3>Evento Principal</h3>
+              </div>
+              <img src="../../assets/images/eventos/{{ principal.imagem }}" alt="" class="featured-event-image">
+              <div class="featured-event-container">
+                <label class="label label-danger">Breve</label> <!-- Replace class label-danger to label-default for passed events -->
+                <div class="featured-event-time">
+                    <span class="date">{{ principal.data|date("j") }}</span>
+                    <span class="month">{{ principal.data|date("M") }}</span>
+                </div>
+                <h4 class="featured-event-title"><a href="/eventos/find/{{ principal.id }}">{{ principal.titulo }}</a></h4>
+                {% set texto_evento = principal.texto %}
+                <p>{{ limita250(texto_evento) }}</p>
+              </div>
+            </div>
+
+            <!-- Eventos Categorias -->
+            <div class="widget sidebar-widget">
+              <div class="sidebar-widget-title">
+                <h3>Eventos Categorias</h3>
+              </div>
+              <ul>
+                {% for categoria in categorias %}
+                {% set id_categoria = categoria.idcat %}
+                <li><a href="/eventos/categoria/{{ id_categoria }}">{{ categoria.categoria }}</a> <span class="badge badge-secondary">{{ countcatevent(id_categoria) }}</span> </li>
+                {% endfor %}    
+              </ul>
+            </div>
+            <!-- Eventos Categorias -->
+          </div>

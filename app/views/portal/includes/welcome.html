@@ -1,0 +1,14 @@
+{% if user() %}
+
+	
+	<li>Bem vindo {{ user().name}}<a href="/login/destroy" class="btn btn-danger">Logout</a></li>
+
+	{% else %}
+
+	
+	<li>Bem Vindo Visitante<a href="/login" class="btn btn-success">Logar</a></li>
+
+	{% endif %}
+
+
+ 

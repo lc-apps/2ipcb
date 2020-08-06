@@ -1,0 +1,80 @@
+{% extends 'portal/layout.html' %}
+
+{% block portal %}
+ <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="/">Home </a></li>
+            <li><a href="/eventos">{{ pagina }}</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Eventos</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+ <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9"> 
+            <!-- Events Listing -->
+            <div class="listing events-listing">
+              <header class="listing-header">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <h3>Todos Eventos</h3><h4>{{ categoria }}</h4>
+                  </div>
+                  <div class="listing-header-sub col-md-6 col-sm-6">
+                    <h5>Mês</h5>
+                    <nav class="next-prev-nav"> <a href="#"><i class="fa fa-angle-left"></i></a> <a href="#"><i class="fa fa-angle-right"></i></a> </nav>
+                  </div>
+                </div>
+              </header>
+
+              <section class="listing-cont">
+                <ul>
+                  {% for event in events %}
+                  <li class="item event-item">
+                    <div class="event-date"> <span class="date">{{ event.data|date("j") }}</span> <span class="month">{{ event.data|date("M") }}</span> </div>
+                    <div class="event-detail">
+                      <h4><a href="/eventos/find/{{ event.id }}">{{ event.titulo }}</a></h4>
+                      <span class="event-dayntime meta-data">{{ event.data|date("l") }} | {{ event.horario }}</span> </div>
+                    <div class="to-event-url">
+                      <div><a href="/eventos/find/{{ event.id }}" class="btn btn-default btn-sm">Mais</a></div>
+                    </div>
+                  </li>                              
+                  {% endfor %}              
+                 
+                </ul>
+              </section>
+
+            </div>
+          </div>
+
+          <!-- Barra Lateral -->
+          {% include 'portal/eventos/includes/barra_lateral.html' %} 
+          <!-- Barra Lateral FIM-->
+         
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+  
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'portal/layout.html' %}
+
+{% block portal %}
+  <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">Blog</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Blog</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 posts-archive">
+
+             {% for post in posts %}
+             {% set id_categoria = post.id_categoria %}
+            <article class="post">
+              <div class="row">
+                <div class="col-md-4 col-sm-4"> <a href="single-event.html"> <img src="../../assets/images/blog/{{ post.imagem }}" alt="" class="img-thumbnail"></a> </div>
+                {% set admin_id = post.post_by %}
+                <div class="col-md-8 col-sm-8">
+                  <h3><a href="/post/find/{{ post.id }}">{{ post.titulo }}</a></h3>
+                  <span class="post-meta meta-data"> <span><i class="fa fa-calendar"></i> Postado em: {{ post.create_at }}</span><span><i class="fa fa-archive"></i> <a href="#">{{ categoria(id_categoria) }}</a></span> <span><i class="fa fa-user"></i>Postado por: {{ nome(admin_id)|title }}</span></span>
+                  {% set texto_blog = post.texto %}
+                  <p>{{ limita250(texto_blog) }}</p>
+                  <p><a href="/post/find/{{ post.id }}" class="btn btn-primary"> Mais <i class="fa fa-long-arrow-right"></i></a></p>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+            
+
+            <ul class="pagination">
+              {{ pagination | raw }}
+            </ul>
+          </div>
+
+          <!-- Start Sidebar -->
+          <div class="col-md-3 sidebar">
+            <div class="widget sidebar-widget search-form-widget">
+              <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="Search Posts...">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><i class="fa fa-search fa-lg"></i></button>
+                </span> </div>
+            </div>
+            <div class="widget sidebar-widget">
+              <div class="sidebar-widget-title">
+                <h3>Post Categories</h3>
+              </div>
+              <ul>
+                <li><a href="#">Faith</a> (10)</li>
+                <li><a href="#">Missions</a> (12)</li>
+                <li><a href="#">Salvation</a> (34)</li>
+                <li><a href="#">Worship</a> (14)</li>
+              </ul>
+            </div>
+            <div class="widget sidebar-widget">
+              <div class="sidebar-widget-title">
+                <h3>Post Tags</h3>
+              </div>
+              <div class="tag-cloud"> <a href="#">Faith</a> <a href="#">Heart</a> <a href="#">Love</a> <a href="#">Praise</a> <a href="#">Sin</a> <a href="#">Soul</a> <a href="#">Missions</a> <a href="#">Worship</a> <a href="#">Faith</a> <a href="#">Heart</a> <a href="#">Love</a> <a href="#">Praise</a> <a href="#">Sin</a> <a href="#">Soul</a> <a href="#">Missions</a> <a href="#">Worship</a> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% if admin() %}
+
+	
+	<li>Bem vindo {{ admin().name}}<a href="/adminLogin/destroy" class="btn btn-danger">Logout</a></li>
+
+	{% else %}
+
+	
+	<li>Bem Vindo Visitante<a href="/admin" class="btn btn-success">Logar</a></li>
+
+	{% endif %}
+
+
+ 

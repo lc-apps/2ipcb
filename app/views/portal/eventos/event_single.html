@@ -1,0 +1,103 @@
+{% extends 'portal/layout.html' %}
+
+{% block portal %}
+ <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="/">Home/eventos</a></li>
+            <li><a href="/eventos">{{ pagina }}</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header -->
+
+<!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <header class="single-post-header clearfix">
+              <nav class="btn-toolbar pull-right"> 
+
+                <!-- Compartilhar -->
+                <a href="#" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-original-title="Print" ><i class="fa fa-print"></i></a>
+                <a href="#" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-original-title="Contact us" ><i class="fa fa-envelope"></i></a>
+                <a href="https://api.whatsapp.com/send?=Teste de Compartilhamento" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-original-title="Share event" ><i class="fa fa-location-arrow"></i></a> </nav>
+                <!-- Compartilhar Fim -->
+                <!-- https://www.tutoriart.com.br/como-criar-links-de-compartilhamento-social-sem-botoes/ -->
+                
+              <h2 class="post-title">{{ title }}</h2>
+            </header>
+            {% set admin_id = event.post_by %}
+            {% set id_categoria = event.id_categoria %}
+            <article class="post-content">
+              <div class="event-description"> <img src="../../assets/images/eventos/{{ event.imagem }}" class="img-responsive">
+                <div class="spacer-20"></div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Detales</h3>
+                      </div>
+
+
+                      <div class="row">
+                        <div class="col-md-4 ">
+                          <div class="panel-body">
+                            <ul class="info-table">
+                              <li><i class="fa fa-layer-group"></i><strong> {{ categoria(id_categoria) }} </strong></li>
+                              <li><i class="fa fa-calendar"></i> <strong>{{ event.data|date("j") }}</strong> | {{ event.data|date("M") }}</li>
+                              <li><i class="fa fa-clock-o"></i> {{ event.data|date("l") }} | {{ event.horario }}</li>
+                              <li><i class="fa fa-map-marker"></i> {{ event.endereco }}</li>
+                            </ul>
+                          </div>
+                        </div> 
+                        <div class="col-md-8 ">
+                          <div class="panel-body">
+                            <ul class="info-table">
+                              <li><i class="fa fa-paragraph"></i> <p>{{ event.texto}}</p></li>
+                              <li><i class="fa fa-user"></i> Postado por: {{ nome(admin_id)|title }}</li>
+                            </ul>
+                          </div>
+
+                        </div> 
+                      </div>                    
+
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </div>
+            </article>
+          </div>
+
+          <!-- Barra Lateral -->
+          {% include 'portal/eventos/includes/barra_lateral.html' %} 
+          <!-- Barra Lateral FIM-->
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% endblock %}

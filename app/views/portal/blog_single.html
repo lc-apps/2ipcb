@@ -1,0 +1,61 @@
+{% extends 'portal/layout.html' %}
+
+{% block portal %}
+ <!-- Start Nav Backed Header -->
+  <div class="nav-backed-header parallax">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/post">{{ pagina }}</a></li>
+            <li class="active">{{ title }}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Nav Backed Header --> 
+  <!-- Start Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-8">
+          <h1>Blog</h1>
+        </div>
+        <div class="col-md-4 col-sm-4">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page Header --> 
+
+  <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9">
+            <header class="single-post-header clearfix">
+              <div class="pull-right post-comments-count"></div>
+              <h2 class="post-title">{{ post.titulo }}</h2>
+            </header>
+            {% set admin_id = post.post_by %}
+            <article class="post-content"> <span class="post-meta meta-data"><span><i class="fa fa-user"></i>Postado por: {{ nome(admin_id)|title }}<i class="fa fa-calendar"></i> Postado em: {{ post.create_at }}</span> <span><i class="fa fa-archive"></i> Categoria <a href="#"> </a></span></span>
+              <div class="featured-image"> <img src="../../assets/images/blog/{{ post.imagem }}" alt=""> </div>
+
+              <p>{{ post.texto }}</p>
+            
+              <div class="post-meta"> <i class="fa fa-tags"></i> <a href="#">Faith</a>, <a href="#">Heart</a>, <a href="#">Love</a>, <a href="#">Praise</a>, <a href="#">Sin</a>, <a href="#">Soul</a> </div>
+            </article>
+
+                        
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
